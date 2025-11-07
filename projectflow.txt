@@ -1,0 +1,17 @@
+1. Create the project template by exucuting the template.py
+2. Write the code on setup.py and pyproject.toml file to import local pacakage
+>> There is more about 'setup.py' and 'pyproject.toml' ay course.txt
+3. Create virtual Env, activate it and install requriments from requirements.txt 
+    conda create -n env_name
+    conda activate env_name
+    and 'pip install -r requirements.txt' to add required modules
+4. 'pip list' to look local pacakage installed
+
+-----MongoDB setup---
+5. Signup to MongoDB atlas and create new project
+6.create cluster and deployment
+7.setup nad create DB user
+8.Get the network access to public so that we can access it from anywhere
+9.'get connection string' driver: python , version:3.12 
+>> copy and save 
+10.create folder 'notebook'
