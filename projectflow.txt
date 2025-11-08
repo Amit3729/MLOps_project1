@@ -15,3 +15,14 @@
 9.'get connection string' driver: python , version:3.12 
 >> copy and save 
 10.create folder 'notebook'
+>> create file'mongodb_demo.ipynb'
+>>select kernal>pythonkernal>
+11.dataset added to notebook
+12.push data to mongodb_demo
+13. go to mongodb atlas >>database>>browse collection>>see you data in Key-value format
+
+------logging,expecton and notebooks-------
+14. Write logger file and test it on demo.py
+15. Write expection file and test it
+16. EDA and feature Engineering notebook added.
+
