@@ -8,12 +8,17 @@
 # logging.critical('Thos is a critical message')
 
 #below code to check expection config
-from src.logger import logging
-from src.exception import MyException
-import sys
+# from src.logger import logging
+# from src.exception import MyException
+# import sys
 
-try:
-    a=1+'z'
-except Exception as e:
-    logging.info(e)
-    raise MyException(e, sys) from e
+# try:
+#     a=1+'z'
+# except Exception as e:
+#     logging.info(e)
+#     raise MyException(e, sys) from e
+
+from src.pipeline.training_pipeline import TrainPipeline
+
+pipeline = TrainPipeline()
+pipeline.run_pipeline()

@@ -7,7 +7,7 @@
     and 'pip install -r requirements.txt' to add required modules
 4. 'pip list' to look local pacakage installed
 
------MongoDB setup---
+------------MongoDB setup------------
 5. Signup to MongoDB atlas and create new project
 6.create cluster and deployment
 7.setup nad create DB user
@@ -25,4 +25,26 @@
 14. Write logger file and test it on demo.py
 15. Write expection file and test it
 16. EDA and feature Engineering notebook added.
+
+---------Data Ingestion---------
+17. Before we work on 'Data Ingestion' In components
+>> Declear variables within constants.__init__.py file..
+>> add code to configuration mongo_db_Connetion.py file and define the func for mongobd connection
+>> Inside the 'data_acess', added code to proj1_data.py that will use mongo_bf_connections.py
+>> to connect with DB, fetch data in key-value format and transform that to df 
+>> add code to entity--config_entity.py file till DataIngestionConfig class
+>> add code to entity.artifact_entity.py file till DataIngestionArtifacr class
+>> add code to components.data_ingestion.py file 
+>> add code to training pipeline
+>> run demp.py(set mongobf connection url first)
+
+For setup connection url
+$env:MONGODB_URL="mongodb+srv://<username>:<password> or for bash>>
+export MONGODB_URL="your_connection_string" 
+
+
+
+for check: echo $MONGODB_URL
+
+
 
