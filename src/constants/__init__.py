@@ -37,7 +37,7 @@ DATA_INGESTION_TRAIN_TEST_SPLIT_RATIO: float = 0.25
 Data validation releated constant start with DATA_VALIDATION var name
 '''
 DATA_VALIDATION_DIR_NAME: str = 'data_validation'
-DATA_VALIDATION_REPOST_FILE_NAME: str = 'report.yaml'
+DATA_VALIDATION_REPORT_FILE_NAME: str = 'report.yaml'
 
 '''
 Data Transformation related constant start with DATA_TRANSFORMATION var name

@@ -42,9 +42,18 @@ For setup connection url
 $env:MONGODB_URL="mongodb+srv://<username>:<password> or for bash>>
 export MONGODB_URL="your_connection_string" 
 
-
-
 for check: echo $MONGODB_URL
+
+Don;t forget to add 'artifact' dir to .gitignore file
+
+------------------Data Validation , Data Transformation and Model Trainer-------------
+
+18. Complete the wrok in utils.main_utils.py and config.schema.yaml file(add entire info about dataset for data validation setp)
+19. Now work on the "data Validation" component the way we did in step 17 for Data Ingesgtion.
+20. Now work on the "data Transformation" component the way we did like as above step(add estimator.py to entity folder)
+21. Now work ont the "Model Trainer" component like above setp. (Add class to class estimator.py in entity folder)
+
+
 
 
 
