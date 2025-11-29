@@ -9,7 +9,7 @@ from src.exception import MyException
 from src.logger import logging
 from src.utils.main_utils import load_numpy_array_data, load_object, save_object
 from src.entity.config_entity import ModelTrainerConfig
-from src.entity.artifact_entity import DataTransformationArtifact,ModelTrainerArtifact,ClassificationMetricArtiface
+from src.entity.artifact_entity import DataTransformationArtifact,ModelTrainerArtifact,ClassificationMetricArtifact
 from src.entity.estimator import MyModel
 
 class ModelTrainer:
@@ -37,12 +37,12 @@ class ModelTrainer:
             logging.info("Train-test split done")
 
             model = RandomForestClassifier(
-                n_estimators = self.model_trainer_config._n_estimator,
-                min_samples_split = self.model_trainer_config._min_sample_split,
-                min_samples_leaf= self.model_trainer_config._min_sample_leaf,
-                max_depth= self.model_trainer_config._max_depth,
-                criterion= self.model_trainer_config._criterion,
-                random_state= self.model_trainer_config._random_State
+                n_estimators = self.model_trainer_config.n_estimators,
+                min_samples_split = self.model_trainer_config.min_samples_split,
+                min_samples_leaf= self.model_trainer_config.min_samples_leaf,
+                max_depth= self.model_trainer_config.max_depth,
+                criterion= self.model_trainer_config.criterion,
+                random_state= self.model_trainer_config.random_state
 
             )
             #fit the model
@@ -58,7 +58,7 @@ class ModelTrainer:
             recall = recall_score(y_test,y_pred)
 
             #Creating metric artifact
-            metric_artifact = ClassificationMetricArtiface(f1_score=f1, precision_score=precision,recall_score=recall)
+            metric_artifact = ClassificationMetricArtifact(f1_score=f1, precision_score=precision,recall_score=recall)
             return model,metric_artifact
             
         except Exception as e:
@@ -76,7 +76,7 @@ class ModelTrainer:
             print("starting Model Trainer Component")
             #load transformed train and test data
             train_arr = load_numpy_array_data(file_path=self.data_transformation_artfact.transformed_train_file_path)
-            test_arr = load_numpy_array_data(file_path=self.data_transformation_artfact.transformed_test_file_apth)
+            test_arr = load_numpy_array_data(file_path=self.data_transformation_artfact.transformed_test_file_path)
             logging.info("train-test data loaded")
 
             #Train model and get metrics

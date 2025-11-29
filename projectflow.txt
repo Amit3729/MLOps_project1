@@ -53,6 +53,40 @@ Don;t forget to add 'artifact' dir to .gitignore file
 20. Now work on the "data Transformation" component the way we did like as above step(add estimator.py to entity folder)
 21. Now work ont the "Model Trainer" component like above setp. (Add class to class estimator.py in entity folder)
 
+23. Before moving to next component of model Evulation, some AWS services setup is needed.
+    - Login to AWS console.
+    - Kepep region set as -us-east-1
+    - Go to IAM >> Create new user(name: name_of project)
+    - Attach policy >> select AdministratorAcess >> next >> Create user
+    - Go to the user >> security Credentials >> Acess keys >> Create access key
+    - Select CLI >> agree to condition >> next >> create Acess key >> Download scv file
+    - Set env variables with above csv values using beow method:
+    -------------------------------------------------------------------
+        Set env var from terminal:
+        export AWS_ACESS_KEY_ID='AWS_ACCESS_KEY_ID'
+        export AWS SECRET_ACCESS_KEY='AWS_SECRET_ACCESS_KEY'
+        >> check env var from terminal:
+        echo $AWS_ACCESS_KEY_ID
+
+
+    - Now add the access key, secret key, region name to cnstants.__init__.py
+    - Add code to src.configuration.aws_connection.py file(to work with AWS s3 service)
+    - Ensure below info in consatants.__init__.py file:
+        MODEL_EVULATION_CHNAGED_THRESHOLD_SCORE: float = 0.02
+        MODEL_BUCKET_ANME = "YOUR BUCKET NAME"
+        MODEL_PUSHER_S3_KEY = 'model-registry'
+    - Go to s3 services ..create bucket..region us-east-1 ..general purpose
+    >>bucket name:'my-model-proj7'..>> uncheck block section adn acknowlwdge.
+    >>Hit create bucket
+    - Now inside 'src.aws_storage' code needs to be added for the configuration needed to pull and push model from AWS s3 bucket.
+    -Inside "entity" dir we will have an 's3_estimator.py' file contaiing all the func to pull/push data form s3 bucket.
+
+24. Now we will start out work on model Evulation and model pusher component.
+
+    
+
+
+
 
 
 
