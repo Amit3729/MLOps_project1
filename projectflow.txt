@@ -82,7 +82,8 @@ Don;t forget to add 'artifact' dir to .gitignore file
     -Inside "entity" dir we will have an 's3_estimator.py' file contaiing all the func to pull/push data form s3 bucket.
 
 24. Now we will start out work on model Evulation and model pusher component.
-
+25. Create the code structure of "predicition pipeline" and setup your app.py
+26. Add "static" and "template" dir to the project
     
 
 

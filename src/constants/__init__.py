@@ -9,8 +9,8 @@ MONGO_URL_KEY = 'MONGODB_URL'
 PIPELINE_NAME: str = ''
 ARTIFACT_DIR: str = 'artifact'
 
-# MODEL_FILE_NAME = 'model.pkl'
-MODEL_FILE_NAME = 'trained_model/model.pkl'
+MODEL_FILE_NAME = 'model.pkl'
+# MODEL_FILE_NAME = 'trained_model/model.pkl'
 
 
 TARGET_COLUMN = 'Response'
@@ -68,8 +68,8 @@ MODEL EVULATION releated constants
 '''
 MODEL_EVULATION_CHANGED_THRESHOLD_SCORE: float = 0.02
 MODEL_BUCKET_NAME = 'my-model-proj7'
-# MODEL_PUSHER_S3_KEY = 'model-registry'
-MODEL_PUSHER_S3_KEY = 'model-registry/trained_model/model.pkl'
+MODEL_PUSHER_S3_KEY = 'model-registry'
+# MODEL_PUSHER_S3_KEY = 'model-registry/trained_model/model.pkl'
 
 APP_HOST = '0.0.0.0'
 APP_PORT = 5000

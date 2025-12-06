@@ -101,7 +101,8 @@ class ModelTrainer:
             #Created and return the ModelTrainerArtifact
             model_trainer_artifact = ModelTrainerArtifact(
                 trained_model_file_path=self.model_trainer_config.trained_model_file_path,
-                metric_artifact= metric_artifact
+                metric_artifact= metric_artifact,
+                preprocessor_path=self.data_transformation_artfact.transformed_object_file_path
             )
             logging.info(f'Model trainer artifact: {model_trainer_artifact}')
             return model_trainer_artifact
