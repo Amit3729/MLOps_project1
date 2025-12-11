@@ -1,5 +1,4 @@
 import sys
-
 from src.cloud_storage.aws_storage import SimpleStorageService
 from src.exception import MyException
 from src.logger import logging

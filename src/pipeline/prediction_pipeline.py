@@ -2,21 +2,21 @@ import sys
 from src.entity.config_entity import VehiclePredictorConfig
 from src.entity.s3_estimator import Proj1Estimator
 from src.exception import MyException
-from src.exception import logging
+from src.logger import logging
 from pandas import DataFrame
 
 class VehicleData:
-    def __init__(self,Gender,
+    def __init__(self,
+                 Gender,
                  Age,
                  Driving_License,
                  Region_Code,
                  Previously_Insured,
+                 Vehicle_Age,
+                 Vehicle_Damage,
                  Annual_Premium,
                  Policy_Sales_Channel,
-                 Vintage,
-                 Vehicle_Age_lt_1_Year,
-                 Vehicle_Age_gt_2_Years,
-                 Vehicle_Damage_Yes):
+                 Vintage):
         '''
         Vehicle data Constructor
         Input: All features of trained model for prediction
@@ -27,17 +27,16 @@ class VehicleData:
             self.Driving_License = Driving_License
             self.Region_Code = Region_Code
             self.Previously_Insured = Previously_Insured
+            self.Vehicle_Age = Vehicle_Age
+            self.Vehicle_Damage = Vehicle_Damage
             self.Annual_Premium = Annual_Premium
             self.Policy_Sales_Channel = Policy_Sales_Channel
             self.Vintage = Vintage
-            self.Vehicle_Age_lt_1_Year = Vehicle_Age_lt_1_Year
-            self.Vehicle_Age_gt_2_Years = Vehicle_Age_gt_2_Years
-            self.Vehicle_Damage_Yes = Vehicle_Damage_Yes
         
         except Exception as e:
             raise MyException(e, sys) from e
         
-    def get_vehicle_input_data_frame(self)->DataFrame:
+    def get_vehicle_input_data_frame(self) -> DataFrame:
         '''
         This function returns a DataFrame from class input
         '''
@@ -45,7 +44,7 @@ class VehicleData:
             vehicle_input_dict = self.get_vehicle_data_as_dict()
             return DataFrame(vehicle_input_dict)
         except Exception as e:
-            raise MyException(e,sys) from e 
+            raise MyException(e, sys) from e 
     
     def get_vehicle_data_as_dict(self):
         '''
@@ -58,43 +57,51 @@ class VehicleData:
                 "Driving_License": [self.Driving_License],
                 "Region_Code": [self.Region_Code],
                 "Previously_Insured": [self.Previously_Insured],
+                "Vehicle_Age": [self.Vehicle_Age],
+                "Vehicle_Damage": [self.Vehicle_Damage],
                 "Annual_Premium": [self.Annual_Premium],
                 "Policy_Sales_Channel": [self.Policy_Sales_Channel],
-                "Vintage": [self.Vintage],
-                "Vehicle_Age_lt_1_Year": [self.Vehicle_Age_lt_1_Year],
-                "Vehicle_Age_gt_2_Years": [self.Vehicle_Age_gt_2_Years],
-                "Vehicle_Damage_Yes": [self.Vehicle_Damage_Yes]
+                "Vintage": [self.Vintage]
             }
+            #check the debug
+            df = DataFrame(input_data)
+            logging.info(f"🔍 DataFrame columns: {df.columns.tolist()}")
+            logging.info(f"🔍 DataFrame shape: {df.shape}")
+            logging.info(f"🔍 DataFrame values:\n{df.to_dict('records')}")
+            logging.info(f"🔍 Vehicle_Age type: {type(self.Vehicle_Age)}, value: '{self.Vehicle_Age}'")
+            logging.info(f"🔍 Vehicle_Damage type: {type(self.Vehicle_Damage)}, value: '{self.Vehicle_Damage}'")
+        
+
+            
+
+            
             logging.info("Created vehicle data dict")
-            logging.info("Exited get_vehicle_data_as_dixt method as VehicleData Class")
+            logging.info("Exited get_vehicle_data_as_dict method as VehicleData Class")
             return input_data
         except Exception as e:
-            raise MyException (e,sys) from e
+            raise MyException(e, sys) from e
     
 class VehicleDataClassifier:
-    def __init__(self, predicition_pipeline_config: VehiclePredictorConfig = VehiclePredictorConfig()):
+    def __init__(self, prediction_pipeline_config: VehiclePredictorConfig = VehiclePredictorConfig()):
         '''
-        predicition_pipeline_condif: Configuration for predicition the value
-
+        prediction_pipeline_config: Configuration for prediction the value
         '''
         try:
-            self.predicition_pipeline_config = predicition_pipeline_config
+            self.prediction_pipeline_config = prediction_pipeline_config
         except Exception as e:
-            raise MyException(e,sys)
+            raise MyException(e, sys)
     
-    def predict(self, dataframe)->str:
+    def predict(self, dataframe) -> str:
         '''
-        returns predicition in string format
+        returns prediction in string format
         '''
         try:
             logging.info("Entered predict method of VehicleDataClassifier class")
             model = Proj1Estimator(
-                bucket_name= self.predicition_pipeline_config.model_bucket_name,
-                model_path= self.predicition_pipeline_config.model_file_path,
-
+                bucket_name=self.prediction_pipeline_config.model_bucket_name,
+                model_path=self.prediction_pipeline_config.model_file_path,
             )
             result = model.predict(dataframe)
             return result
         except Exception as e:
-            raise MyException (e,sys)
-        
+            raise MyException(e, sys)
