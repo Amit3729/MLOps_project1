@@ -1,16 +1,16 @@
-# Use an official Python 3.10 image
+# Use official Python image
 FROM python:3.10-slim-buster
 
-# Set the working directory
+# Set app directory
 WORKDIR /app
 
-# Copy all project files into the container
-COPY . /app
+# Copy all project files
+COPY . .
 
 # Install dependencies
-RUN pip install -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Expose the FastAPI port
+# Expose FastAPI port
 EXPOSE 5001
 
 # Run the FastAPI app
