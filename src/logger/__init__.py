@@ -5,7 +5,7 @@ from datetime import datetime
 
 # Constants
 LOG_DIR = "logs"
-LOG_FILE = f"{datetime.now().strftime('%m_%d_%Y_%H_%M_%S')}.log"
+LOG_FILE = datetime.now().strftime("%m_%d_%Y_%H_%M_%S.log")
 MAX_LOG_SIZE = 5 * 1024 * 1024
 BACKUP_COUNT = 3
 
