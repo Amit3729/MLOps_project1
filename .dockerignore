@@ -1,0 +1,17 @@
+artifact/
+logs/
+notebook/
+venv/
+env/
+.env
+.git/
+.github/
+__pycache__/
+*.csv
+*.log
+*.ipynb
+src.egg-info/
+README.md
+LICENSE
+demo.py
+template.py
