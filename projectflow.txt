@@ -109,7 +109,7 @@ Don;t forget to add 'artifact' dir to .gitignore file
 29. Next step is to connect Github with EC2(self hosted runner)
     - Select the Project on GitHub >> Setting >> action>> Runner >> New self hosted runner
         >> run first "configure"command(hit enter to add this runnner, runner name:self-hosted)
-        >> enter anu additional label (hit enter to skip) >> name of work folder(again hit enter)
+        >> enter any additional label (hit enter to skip) >> name of work folder(again hit enter)
         >> TO crosscheck, go back to github and click on runner and you will see runer state as "idle"
         >>> if ctr+c on EC@ server then runner will shut then restart with "./run.sh"
 
