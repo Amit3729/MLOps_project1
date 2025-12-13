@@ -1,21 +1,25 @@
 # Use official Python image
 FROM python:3.10-slim-buster
 
-# Set app directory
+# Good defaults
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+
 WORKDIR /app
 
-# Copy all project files
+# Copy and install requirements FIRST (critical for caching + fixes your error)
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Now copy the actual app
 COPY app.py .
 COPY src/ src/
 COPY config/ config/
 COPY templates/ templates/
 COPY static/ static/
 
-# Install dependencies
-RUN pip install -r requirements.txt
-
-# Expose FastAPI port
+# Expose port
 EXPOSE 5001
 
-# Run the FastAPI app
+# Run the app
 CMD ["python3", "app.py"]
