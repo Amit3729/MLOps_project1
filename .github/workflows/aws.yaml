@@ -28,7 +28,7 @@ jobs:
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           ECR_REPOSITORY: ${{ secrets.ECR_REPO }}
-          IMAGE_TAG: latest
+          IMAGE_TAG: ${{ github.sha }}
         run: |
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
@@ -57,15 +57,13 @@ jobs:
         run: |
           REGISTRY="${{ steps.login-ecr.outputs.registry }}"
           REPO="${{ secrets.ECR_REPO }}"
-          IMAGE="$REGISTRY/$REPO:latest"
+          IMAGE_TAG="${{ needs.Continuous-Integration.outputs.image || 'latest' }}"  # fallback if needed
+          IMAGE="$REGISTRY/$REPO:$IMAGE_TAG"
 
-          echo "Pulling image $IMAGE"
           docker pull $IMAGE
 
-          echo "Stopping and removing old container if exists"
           docker rm -f vehicle-app || true
 
-          echo "Starting new container"
           docker run -d \
             --name vehicle-app \
             --restart unless-stopped \
@@ -76,14 +74,42 @@ jobs:
             -p 5000:5001 \
             $IMAGE
 
-          echo "Waiting 10 seconds for startup..."
           sleep 10
-
-          echo "=== Container status ==="
           docker ps -a
-
-          echo "=== Container logs ==="
           docker logs vehicle-app --tail 100
+
+      # - name: Deploy container with logs
+      #   run: |
+      #     REGISTRY="${{ steps.login-ecr.outputs.registry }}"
+      #     REPO="${{ secrets.ECR_REPO }}"
+      #     IMAGE_TAG="${{ needs.Continuous-Integration.outputs.image || 'latest' }}"  # fallback if needed
+      #     IMAGE="$REGISTRY/$REPO:$IMAGE_TAG"
+
+      #     echo "Pulling image $IMAGE"
+      #     docker pull $IMAGE
+
+      #     echo "Stopping and removing old container if exists"
+      #     docker rm -f vehicle-app || true
+
+      #     echo "Starting new container"
+      #     docker run -d \
+      #       --name vehicle-app \
+      #       --restart unless-stopped \
+      #       -e AWS_ACCESS_KEY_ID="${{ secrets.AWS_ACCESS_KEY_ID }}" \
+      #       -e AWS_SECRET_ACCESS_KEY="${{ secrets.AWS_SECRET_ACCESS_KEY }}" \
+      #       -e AWS_DEFAULT_REGION="${{ secrets.AWS_DEFAULT_REGION }}" \
+      #       -e MONGODB_URL="${{ secrets.MONGODB_URL }}" \
+      #       -p 5000:5001 \
+      #       $IMAGE
+
+      #     echo "Waiting 10 seconds for startup..."
+      #     sleep 10
+
+      #     echo "=== Container status ==="
+      #     docker ps -a
+
+      #     echo "=== Container logs ==="
+      #     docker logs vehicle-app --tail 100
 
   # Continuous-Deployment:
   #   needs: Continuous-Integration
