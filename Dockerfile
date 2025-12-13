@@ -5,7 +5,11 @@ FROM python:3.10-slim-buster
 WORKDIR /app
 
 # Copy all project files
-COPY . .
+COPY app.py .
+COPY src/ src/
+COPY config/ config/
+COPY templates/ templates/
+COPY static/ static/
 
 # Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
