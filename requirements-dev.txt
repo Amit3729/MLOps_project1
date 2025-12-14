@@ -1,0 +1,7 @@
+jupyter
+ipython
+ipykernel
+matplotlib
+seaborn
+plotly
+debugpy
