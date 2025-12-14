@@ -2,7 +2,7 @@
 
 > **Production‑grade Machine Learning System with MongoDB, AWS, Docker, CI/CD, and Model Deployment**
 
-This project demonstrates a **complete MLOps lifecycle**, from raw data ingestion to automated deployment on AWS. It is designed to **impress recruiters and technical reviewers** by showcasing real‑world tools, best practices, and scalable architecture used in modern ML engineering.
+This project demonstrates a **complete MLOps lifecycle**, from raw data ingestion to automated deployment on AWS. It is designed to **gain real world knowledge** by showcasing real‑world tools, best practices, and scalable architecture used in modern ML engineering.
 
 ---
 
