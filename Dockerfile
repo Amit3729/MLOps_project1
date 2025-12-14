@@ -1,22 +1,29 @@
-    FROM python:3.10-slim-buster
+# ---------- STAGE 1: builder ----------
+FROM python:3.10-slim-buster AS builder
 
-    ENV PYTHONDONTWRITEBYTECODE=1
-    ENV PYTHONUNBUFFERED=1
-    
-    WORKDIR /app
+WORKDIR /app
 
-    # THIS LINE IS THE FIX – copy requirements first
-    COPY requirements.txt .
+RUN apt-get update && apt-get install -y \
+    gcc \
+    g++ \
+    build-essential \
+    && rm -rf /var/lib/apt/lists/*
 
-    # Install dependencies
-    RUN pip install --no-cache-dir -r requirements.txt
+COPY requirements.txt .
 
-    # Copy the rest of the code
-    COPY app.py .
-    COPY src/ src/
-    COPY config/ config/
-    COPY templates/ templates/
-    COPY static/ static/
+RUN pip install --upgrade pip \
+    && pip install --no-cache-dir -r requirements.txt
 
-    EXPOSE 5001
-    CMD ["python3", "app.py"]
+
+# ---------- STAGE 2: runtime ----------
+FROM python:3.10-slim-buster
+
+WORKDIR /app
+
+# copy only installed packages (no build junk)
+COPY --from=builder /usr/local/lib/python3.10/site-packages /usr/local/lib/python3.10/site-packages
+COPY --from=builder /usr/local/bin /usr/local/bin
+
+COPY . .
+
+CMD ["python3", "app.py"]
