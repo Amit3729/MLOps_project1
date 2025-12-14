@@ -1,118 +1,186 @@
-End-to-End MLOps Project
-A Production-Ready Machine Learning Pipeline with Cloud Integration and CI/CD
-This project demonstrates a complete MLOps implementation, from data ingestion to model deployment. It showcases best practices in modular code structure, cloud storage, containerization, and automated CI/CD pipelines.
-ml-ops.orgtowardsdatascience.commedium.com
+🚀 MLOps Project: End-to-End Machine Learning Pipeline
 
+Welcome to my MLOps Project, an end-to-end machine learning workflow demonstrating data ingestion, processing, model training, evaluation, deployment, and CI/CD automation. This project showcases my expertise in Python, MongoDB, AWS, Docker, and CI/CD pipelines, and provides a robust template for scalable machine learning applications.
 
-Key Technologies & Tools
+🌟 Project Overview
 
+This project implements a full MLOps pipeline, including:
 
+Project scaffolding & modular Python package setup
 
+Data ingestion from MongoDB
 
+Logging and exception handling
 
+Data validation, transformation, and feature engineering
 
+Model training, evaluation, and deployment
 
+CI/CD automation using GitHub Actions, Docker, AWS ECR, and EC2
 
+AWS S3 integration for model storage and versioning
 
+Web app interface for prediction and monitoring
 
+🛠 Technologies & Tools Used
+Layer	Tools & Libraries
+Programming	Python 3.12, Jupyter Notebooks
+Data Storage	MongoDB Atlas
+Data Processing	pandas, numpy
+Logging & Exception Handling	Python logging, custom exception modules
+Machine Learning	scikit-learn, custom pipelines
+AWS Services	S3 (model storage), IAM (access control), EC2 (deployment), ECR (container registry)
+Containerization & CI/CD	Docker, GitHub Actions, Self-hosted runner on EC2
+Web Interface	 HTML templates
+⚡ Project Setup
+1. Project Scaffolding
+# Create project template
+python template.py
 
+# Setup local package
+# Add code in setup.py and pyproject.toml
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-CategoryTechnologies/ServicesLanguage & FrameworkPython, Flask (for prediction API)DatabaseMongoDB Atlas (Cloud NoSQL)Cloud StorageAWS S3 (Model Registry)ContainerizationDockerCI/CDGitHub Actions (Self-hosted runner on AWS EC2)InfrastructureAWS EC2 (Deployment), AWS ECR (Docker Registry), AWS IAMPipeline ComponentsCustom modular components: Data Ingestion, Validation, Transformation, Training, Evaluation, PusherOthersLogging, Custom Exceptions, EDA Notebooks, Virtual Environments
-mongodb.comaws.plainenglish.iodocker.comblog.devgenius.iolevelup.gitconnected.com
-
-
-
-
-Project Features
-
-Modular Architecture: Clean separation of concerns using components/, entity/, configuration/, and pipeline/ directories.
-Data Handling: Ingestion from MongoDB Atlas, validation against schema, transformation, and feature engineering.
-Model Management: Training, evaluation with threshold-based change detection, and pushing to AWS S3 registry.
-Production Readiness: Flask-based prediction API, Docker containerization.
-Automated Deployment: Full CI/CD pipeline using GitHub Actions, self-hosted on EC2, with ECR for images.
-Best Practices: Custom logging, exception handling, virtual environments, .gitignore for artifacts.
-
-Project Structure Overview
-textproject/
-├── src/
-│   ├── components/     # Data Ingestion, Validation, Transformation, Trainer, Evaluation, Pusher
-│   ├── configuration/  # MongoDB & AWS connections
-│   ├── entity/         # Config & Artifact entities, estimators
-│   ├── pipeline/       # Training & Prediction pipelines
-│   ├── utils/          # Main utilities
-│   └── aws_storage/    # S3 operations
-├── notebook/           # EDA, Feature Engineering, MongoDB demo
-├── app.py              # Flask prediction app
-├── template/ & static/ # Web UI assets
-├── Dockerfile
-├── requirements.txt
-├── setup.py / pyproject.toml
-└── .github/workflows/  # CI/CD yaml
-Quick Setup & Run Guide
-1. Project Initialization
-Bashpython template.py  # Create project structure
-# Configure setup.py and pyproject.toml for local package import
 2. Environment Setup
-Bashconda create -n mlops_env python=3.12
-conda activate mlops_env
+# Create virtual environment
+conda create -n env_name python=3.12
+conda activate env_name
+
+# Install required dependencies
 pip install -r requirements.txt
-3. MongoDB Atlas Setup
 
-Create cluster, database user, allow network access.
-Get Python connection string and set environment variable:
+# Check installed packages
+pip list
 
-Bashexport MONGODB_URL="mongodb+srv://<user>:<pass>@cluster..."
-4. Data Ingestion & Pipeline
+🗄 MongoDB Setup
 
-Update constants/__init__.py, configuration files.
-Run demo.py to test ingestion.
-Execute training pipeline for full flow.
+Signup to MongoDB Atlas and create a new project & cluster
 
-5. AWS Setup for Model Registry
+Create DB user and configure network access (allow public access)
 
-Create IAM user with AdministratorAccess.
-Create S3 bucket.
-Set environment variables:
+Get connection string for Python driver (Python 3.12)
 
-Bashexport AWS_ACCESS_KEY_ID=...
-export AWS_SECRET_ACCESS_KEY=...
-export AWS_DEFAULT_REGION=us-east-1
-6. Deployment & CI/CD
+Create notebook/mongodb_demo.ipynb for testing
 
-Build Docker image.
-Setup ECR repository.
-Configure self-hosted GitHub Actions runner on EC2.
-Add secrets in GitHub repo.
-On push, pipeline builds, pushes to ECR, deploys to EC2.
-Access app at http://<EC2_PUBLIC_IP>:5001
+Add datasets and push data to MongoDB
 
-This project highlights expertise in building scalable, production-grade ML systems with modern DevOps practices. Perfect for demonstrating MLOps proficiency! 🚀1.6s
+Verify data in MongoDB Atlas (key-value format)
+
+📓 Logging, Exception Handling & EDA
+
+Custom logger and exception modules created and tested
+
+EDA and feature engineering notebooks prepared for dataset insights
+
+🏗 Data Ingestion Pipeline
+
+Define constants in constants/__init__.py
+
+Configure MongoDB connection in mongo_db_connection.py
+
+Fetch data in proj1_data.py and transform into pandas DataFrame
+
+Define DataIngestionConfig and DataIngestionArtifact classes
+
+Implement data_ingestion.py and integrate with training pipeline
+
+Run demo.py with MongoDB URL set:
+
+# PowerShell
+$env:MONGODB_URL="your_connection_string"
+
+# Bash
+export MONGODB_URL="your_connection_string"
+
+
+Note: Add artifact folder to .gitignore
+
+🔄 Data Validation, Transformation & Model Training
+
+Define dataset schema in config/schema.yaml
+
+Implement utility functions in utils/main_utils.py
+
+Develop Data Validation, Data Transformation, and Model Trainer components
+
+Use estimator.py for ML estimator configurations
+
+☁ AWS Integration
+
+IAM Setup: Create user with Admin access and configure access keys
+
+Environment Variables:
+
+export AWS_ACCESS_KEY_ID='YOUR_ACCESS_KEY_ID'
+export AWS_SECRET_ACCESS_KEY='YOUR_SECRET_ACCESS_KEY'
+export AWS_DEFAULT_REGION='us-east-1'
+
+
+S3 Bucket Setup: Model storage and retrieval via src/aws_storage and s3_estimator.py
+
+Constants for model evaluation:
+
+MODEL_EVULATION_CHANGED_THRESHOLD_SCORE = 0.02
+MODEL_BUCKET_NAME = "my-model-proj7"
+MODEL_PUSHER_S3_KEY = "model-registry"
+
+🚀 Model Deployment & Prediction
+
+Create prediction pipeline and setup app.py
+
+Add static and template directories for web interface
+
+Expose EC2 port 5001 for app access
+
+Access web app: http://<EC2_PUBLIC_IP>:5001
+
+🛠 CI/CD Pipeline
+
+Dockerize project using Dockerfile and .dockerignore
+
+Configure GitHub Actions in .github/workflows/aws.yaml
+
+Connect GitHub to self-hosted EC2 runner
+
+Push Docker images to AWS ECR
+
+CI/CD pipeline triggers on code commits
+
+EC2 instance runs Dockerized ML app
+
+📂 Directory Structure (Key Files)
+├── src/
+│   ├── configuration/
+│   │   └── mongo_db_connection.py
+│   │   └── aws_connection.py
+│   ├── components/
+│   │   ├── data_ingestion.py
+│   │   ├── data_validation.py
+│   │   ├── data_transformation.py
+│   │   ├── model_trainer.py
+│   │   ├── model_evaluation.py
+│   │   └── model_pusher.py
+│   ├── aws_storage/
+│   │   └── s3_estimator.py
+│   └── entity/
+│       ├── config_entity.py
+│       ├── artifact_entity.py
+│       └── estimator.py
+├── notebook/
+│   └── mongodb_demo.ipynb
+├── requirements.txt
+├── setup.py
+├── pyproject.toml
+├── Dockerfile
+└── app.py
+
+🌟 Highlights
+
+Full MLOps workflow from data ingestion to deployment
+
+Integration with MongoDB, AWS S3, and EC2
+
+Custom logging, exception handling, and pipeline classes
+
+CI/CD automation using GitHub Actions and Docker
+
+Web interface for real-time predictions
