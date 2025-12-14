@@ -1,29 +1,27 @@
-# ---------- STAGE 1: builder ----------
-FROM python:3.10-slim-buster AS builder
+# Use a modern, supported Python base image
+FROM python:3.10-slim-bullseye
 
+# Set working directory
 WORKDIR /app
 
-RUN apt-get update && apt-get install -y \
+# Install build tools (gcc, g++), required for some Python packages
+RUN apt-get update && apt-get install -y --no-install-recommends \
     gcc \
     g++ \
     build-essential \
     && rm -rf /var/lib/apt/lists/*
 
-COPY requirements-prod.txt .
-RUN pip install --upgrade pip \
-    && pip install --no-cache-dir --prefer-binary -r requirements-prod.txt
+# Copy only requirements first for better caching
+COPY requirements.txt .
 
+# Install Python dependencies
+RUN pip install --no-cache-dir -r requirements.txt
 
-
-# ---------- STAGE 2: runtime ----------
-FROM python:3.10-slim-buster
-
-WORKDIR /app
-
-# copy only installed packages (no build junk)
-COPY --from=builder /usr/local/lib/python3.10/site-packages /usr/local/lib/python3.10/site-packages
-COPY --from=builder /usr/local/bin /usr/local/bin
-
+# Copy the rest of the application
 COPY . .
 
+# Expose the port your app runs on
+EXPOSE 5001
+
+# Run the application
 CMD ["python3", "app.py"]
